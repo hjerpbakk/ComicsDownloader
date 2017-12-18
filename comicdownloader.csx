@@ -5,17 +5,18 @@
 #r "nuget: Newtonsoft.Json, 10.0.3"
 
 using Newtonsoft.Json;
+var minify = Args.Contains("m");
 var config = JsonConvert.DeserializeObject<AppConfig>(File.ReadAllText("config.json"));
-var fileSystem = new FileSystem(config.ComicName);
+var fileSystem = new FileSystem(config.ComicName, minify);
 var webClient = new WebClient(config.AddressOfFirstComic, config.LoginCookie);
 
-// TODO: Minify, if user wants
 // TODO: Combine into a comic archive, if user wants
 // TODO: Unify same comic from multiple sources, detect duplicates
 // TOOD: Do login as part of script
 
 var comicPath = fileSystem.LoadProgress(webClient.PathOfFirstComic);
 while (true) {
+
     var comicHTML = await webClient.GetComicHTML(comicPath);    
     var imageAddress = comicHTML.GetComicPath();
     
