@@ -1,7 +1,9 @@
 #r "nuget: System.IO.Compression, 4.3.0"
+#r "nuget: Polly, 5.6.1"
 
 using System.IO;
 using System.IO.Compression;
+using Polly;
 
 public class FileSystem
 {
@@ -27,12 +29,11 @@ public class FileSystem
             return;
         }
 
-        Console.WriteLine($"Optimizing image");
-        var processStartInfo = new ProcessStartInfo {
-            FileName = "/Applications/ImageOptim.app/Contents/MacOS/ImageOptim",
-            Arguments = filePath
-        };
-        Process.Start(processStartInfo);
+        // To handle intermittent exceptions of type: System.ComponentModel.Win32Exception (0x80004005): Resource temporarily unavailable
+        Policy
+            .Handle<System.ComponentModel.Win32Exception>()
+            .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(1))
+            .Execute(() => OptimizeImage(filePath));
     }
 
     public (string PathOfFirstComic, int Progress) LoadProgress(string pathOfFirstComic)    
@@ -52,6 +53,10 @@ public class FileSystem
     public void CreateCBZ() {
         var path = Path.Combine(comicsPath, "..", $"{comicName}.cbz");
         Console.WriteLine($"Creating comic archive {path}"); 
+        if (File.Exists(path)) {
+            File.Delete(path);
+        }
+        
         ZipFile.CreateFromDirectory(comicsPath, path);
     }
 
@@ -63,5 +68,14 @@ public class FileSystem
         }
 
         return path;
+    }
+
+    private void OptimizeImage(string filePath) {
+        Console.WriteLine($"Optimizing image");
+        var processStartInfo = new ProcessStartInfo {
+            FileName = "/Applications/ImageOptim.app/Contents/MacOS/ImageOptim",
+            Arguments = filePath
+        };
+        Process.Start(processStartInfo);
     }
 }
