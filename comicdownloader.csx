@@ -37,10 +37,10 @@ while (true) {
 
     comicPath = nextComic.Path;
     var end = DateTime.UtcNow;
-    var waitTime = 1000 - (end - start).TotalMilliseconds;
+    var waitTime = (int)(1000 - (end - start).TotalMilliseconds);
     if (waitTime > 0) {
         Console.WriteLine($"Sleeping {waitTime}ms");
-        await Task.Delay((int)waitTime);
+        await Task.Delay(waitTime);
     }
 }
 
