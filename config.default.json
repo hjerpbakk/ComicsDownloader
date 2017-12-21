@@ -1,5 +1,6 @@
 ﻿{
   "ComicName": "[ComicName]",
   "AddressOfFirstComic": "[AddressOfFirstComic]",
-  "LoginCookie": "[LoginCookie]"
+  "LoginCookie": "[LoginCookie]",
+  "DropLocation": "[DropLocation]"
 }

@@ -48,4 +48,8 @@ if (createCBZ) {
     fileSystem.CreateCBZ();
 }
 
+if (Directory.Exists(config.DropLocation)) {
+    fileSystem.CopyToDropLocation(config.DropLocation);
+}
+
 Console.WriteLine("Fin");
