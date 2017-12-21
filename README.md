@@ -61,7 +61,7 @@ dotnet script comicdownloader.csx -- m a
 
 ### a - Archive to CBZ
 
-`a` archives the comic strips into a [.cbz-file](https://www.howtogeek.com/291936/what-are-cbr-and-cbz-files-and-why-are-they-used-for-comics/). CBZ is a file format for comics and can be read by any modern comic reader app on any platform.
+In addition to download the strips normally, `a` archives the comic strips into a [.cbz-file](https://www.howtogeek.com/291936/what-are-cbr-and-cbz-files-and-why-are-they-used-for-comics/). CBZ is a file format for comics and can be read by any modern comic reader app on any platform.
 
 ```shell
 .
