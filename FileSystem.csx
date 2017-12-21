@@ -74,7 +74,7 @@ public class FileSystem
         Console.WriteLine($"Optimizing image");
         var processStartInfo = new ProcessStartInfo {
             FileName = "/Applications/ImageOptim.app/Contents/MacOS/ImageOptim",
-            Arguments = filePath,
+            Arguments = $"\"{filePath}\"",
             UseShellExecute = false
         };
         
