@@ -1,6 +1,6 @@
 # Comics Downloader
 
-Comics Downloader will download comics from [comics.io](https://comics.io/). It will start with a specified strip and continue until all strips are downloaded for the given comic.
+Comics Downloader is a dotnet script that will download comics from [comics.io](https://comics.io/). It will start with a specified strip and continue until all strips are downloaded for the given comic, and optionally combine them into a .cbz-archive.
 
 ## Basic usage
 
