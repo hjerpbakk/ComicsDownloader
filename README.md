@@ -1,6 +1,6 @@
 # Comics Downloader
 
-Comics Downloader will download comics from [comics.io](https://comics.io/). It will start with a specified strip and continue to all strips are downloaded for the given comic.
+Comics Downloader will download comics from [comics.io](https://comics.io/). It will start with a specified strip and continue until all strips are downloaded for the given comic.
 
 ## Basic usage
 
